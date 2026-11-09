@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Birthday Surprise</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;font-family:Georgia,serif;color:#fff;background:radial-gradient(circle at top,#58346f 0,#241a3e 48%,#101326 100%);overflow-x:hidden}
+  .stars{position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(#ffffffb0 1px,transparent 1px),radial-gradient(#ffffff70 1px,transparent 1px);background-size:83px 83px,137px 137px;background-position:0 0,35px 50px;opacity:.35}
+  .wrap{position:relative;z-index:1;min-height:100vh;display:grid;place-items:center;padding:28px 16px}
+  .card{width:min(680px,100%);text-align:center;padding:clamp(25px,6vw,55px) clamp(20px,5vw,48px);border:1px solid #ffffff35;border-radius:28px;background:#ffffff12;backdrop-filter:blur(12px);box-shadow:0 24px 80px #0006}
+  .eyebrow{letter-spacing:4px;text-transform:uppercase;font:12px Arial,sans-serif;color:#ffd9ee}
+  h1{font-size:clamp(42px,9vw,76px);line-height:1.02;margin:18px 0 12px;color:#ffe4f2;text-shadow:0 0 25px #ff8cc477}
+  .name{color:#ffc0dc}
+  .sub{font:16px/1.7 Arial,sans-serif;color:#f2e8f6;max-width:490px;margin:0 auto}
+  .cake{font-size:82px;margin:22px 0 10px;filter:drop-shadow(0 8px 18px #ff9ac655);animation:bob 3s ease-in-out infinite}
+  @keyframes bob{50%{transform:translateY(-9px)}}
+  .message{margin:24px auto 0;max-width:500px;padding:20px;border-radius:18px;background:#ffffff12;font:16px/1.8 Arial,sans-serif;color:#fff0f7}
+  button{margin-top:25px;border:0;border-radius:999px;padding:14px 25px;background:linear-gradient(100deg,#ff9acb,#ffc4a8);color:#3a2142;font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 8px 25px #ff9acb44}
+  button:hover{transform:translateY(-2px)}
+  #surprise{display:none;margin-top:20px;font-size:23px;color:#ffe0f0;line-height:1.5}
+  .hint{margin-top:20px;color:#d9c8e6;font:12px Arial,sans-serif}
+  .float{position:fixed;bottom:-50px;font-size:24px;opacity:.75;animation:rise linear infinite;pointer-events:none}
+  @keyframes rise{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+  footer{margin-top:26px;font:12px Arial,sans-serif;color:#cdbbd8}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<div class="wrap">
+  <main class="card">
+    <div class="eyebrow">A little celebration just for you</div>
+    <h1>Happy Birthday,<br><span class="name" id="person">Beautiful Soul</span>!</h1>
+    <p class="sub">Today is all about celebrating you and the happiness you bring into the world.</p>
+    <div class="cake">🎂</div>
+    <section class="message" id="message">
+      May your day be filled with laughter, lovely surprises, and all the little things that make you happy.
+      May the year ahead bring you wonderful memories, new adventures, and countless reasons to smile.
+    </section>
+    <button id="reveal">Open your little surprise ✨</button>
+    <div id="surprise">🎉 Make a wish! May all your birthday wishes find their way to you. 💖</div>
+    <div class="hint">Made with warm wishes, just for you.</div>
+    <footer>With love · Birthday edition</footer>
+  </main>
+</div>
+<script>
+  // PERSONALIZE THESE THREE LINES:
+  const birthdayName = "Beautiful Soul";
+  const birthdayMessage = "May your day be filled with laughter, lovely surprises, and all the little things that make you happy. May the year ahead bring you wonderful memories, new adventures, and countless reasons to smile.";
+  const signature = "With love · Birthday edition";
+
+  document.getElementById("person").textContent = birthdayName;
+  document.getElementById("message").textContent = birthdayMessage;
+  document.querySelector("footer").textContent = signature;
+
+  document.getElementById("reveal").addEventListener("click", () => {
+    document.getElementById("surprise").style.display = "block";
+    document.getElementById("reveal").textContent = "Surprise opened 💗";
+    for(let i=0;i<24;i++){
+      const el=document.createElement("div");
+      el.className="float";
+      el.textContent=["💖","✨","🎈","🌸","💕"][Math.floor(Math.random()*5)];
+      el.style.left=Math.random()*100+"vw";
+      el.style.animationDuration=(4+Math.random()*5)+"s";
+      el.style.fontSize=(18+Math.random()*20)+"px";
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),9500);
+    }
+  });
+</script>
+</body>
+</html>
